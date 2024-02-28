@@ -1,0 +1,49 @@
+<!-- TW Elements is free under AGPL, with commercial license required for specific uses. See more details: https://tw-elements.com/license/ and contact us for queries at tailwind@mdbootstrap.com --> 
+<div
+  id="carouselExampleSlidesOnly"
+  class="relative"
+  data-te-carousel-init
+  data-te-ride="carousel">
+  <!--Carousel items-->
+  <div
+    class="relative w-full overflow-hidden after:clear-both after:block after:content-['']">
+    <!--First item-->
+    <div
+      class="relative float-left -mr-[100%] w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none"
+      data-te-carousel-item
+      data-te-carousel-active>
+      <img
+        src="images/edm-epa.jpg"
+        class="block w-full"
+        alt="arte marcial imagen" />
+    </div>
+    <!--Second item-->
+    <div
+      class="relative float-left -mr-[100%] hidden w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none"
+      data-te-carousel-item>
+      <img
+        src="images/edm.jpg"
+        class="block w-full"
+        alt="arte marcial imagen" />
+    </div>
+    <!--Third item-->
+    <div
+      class="relative float-left -mr-[100%] hidden w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none"
+      data-te-carousel-item>
+      <img
+        src="images/train-1.jpg"
+        class="block w-full"
+        alt="arte marcial imagen" />
+    </div>
+  </div>
+</div>
+
+
+<script>
+    import {
+      Carousel,
+      initTE,
+    } from "tw-elements";
+    
+    initTE({ Carousel });
+</script>

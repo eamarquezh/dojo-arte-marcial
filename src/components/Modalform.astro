@@ -1,0 +1,176 @@
+---
+import { Resend } from "resend";
+
+const resend = new Resend("re_dgYHWtV2_DW6bpQfx2zVAwDBep3d2tKEM");
+---
+<div id="myModal" class="modal hidden fixed inset-0 bg-black bg-opacity-50 items-center justify-center animate-fade-up">
+    <div class="modal-content bg-white w-full h-full p-2">
+        <p class="text-center">
+        ¡Aprovecha ahora y solicita tu clase gratis!</p>
+        <div class="container mx-auto p-1">
+        <form id="my-form" action="https://formspree.io/f/mgegydon" method="POST" class="max-w-md mx-auto bg-white p-8 rounded-lg shadow-md">
+        
+        <div class="mb-4">
+            <label for="nombre" class="block text-gray-700 text-sm font-bold mb-1">Categoria:</label>
+            <input type="text" id="categoria" readonly name="categoria" class="w-full border p-2 rounded-md"/>
+        </div>
+
+            <div class="mb-4">
+            <label for="nombre" class="block text-gray-700 text-sm font-bold mb-1">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" class="w-full border p-2 rounded-md" placeholder="Nombre completo" required />
+            </div>
+        
+            <div class="mb-4">
+            <label for="telefono" class="block text-gray-700 text-sm font-bold mb-1">Teléfono:</label>
+            <input type="tel" id="telefono" name="telefono" class="w-full border p-2 rounded-md" placeholder="Número de teléfono" required />
+            </div>
+        
+            <div class="mb-4">
+            <label for="correo" class="block text-gray-700 text-sm font-bold mb-1">Correo electrónico:</label>
+            <input type="email" id="correo" name="correo" class="w-full border p-2 rounded-md" placeholder="Correo electrónico" required />
+            </div>
+        
+            <div class="mb-4">
+            <label for="direccion" class="block text-gray-700 text-sm font-bold mb-1">Dirección:</label>
+            <textarea id="direccion" name="direccion" class="w-full border p-2 rounded-md" placeholder="Dirección"></textarea>
+            </div>
+        
+            <div class="flex justify-end space-x-4">
+            <button type="button" class="bg-blue-500 text-white px-4 py-2 rounded-md" onclick='closeModal()'>Cerrar</button>
+            <button class="bg-green-500 text-white px-4 py-2 rounded-md" data-confetti-button>Enviar</button>
+            </div>
+
+            <p id="my-form-status"></p>
+        </form>
+        </div>
+        
+    </div>
+</div>
+
+
+<div id="genial" class="modal hidden fixed inset-0 bg-black bg-opacity-50 items-center justify-center animate-fade-up">
+    <div class="modal-content bg-white w-full h-full p-2">
+        <h1 class="text-center">
+            ¡Enhorabuena por tomar una decisión importante! Pronto nos pondremos en contacto contigo. 
+        </h1>
+    </div>
+</div>
+
+  
+<script is:inline>
+
+
+    function closeModal() {
+      document.getElementById("myModal").classList.add("animate-jump-out");
+      setTimeout(() => {
+          document.getElementById("myModal").classList.add("hidden"); 
+          document.getElementById("myModal").classList.remove("animate-jump-in");
+          document.getElementById("myModal").classList.remove("animate-jump-out");        
+      }, 1000);
+    }
+  
+  </script>
+  <script is:inline type="module">
+    import JSConfetti from 'https://cdn.skypack.dev/js-confetti';
+  
+    const jsConfetti = new JSConfetti();
+    const button = document.querySelector('[data-confetti-button]');
+    const form = document.getElementById("my-form");
+    const status = document.getElementById("my-form-status");
+
+    async function handleSubmit(event) {
+      event.preventDefault();
+      
+      const data = new FormData(event.target);
+      const response = await fetch(this.action, {
+        method: form.method,
+        body: data,
+        headers: {
+            'Accept': 'application/json'
+        }
+      }).then(response => {
+        if (response.ok) {
+          status.innerHTML = "Gracias";
+          this.reset()
+        } else {
+          response.json().then(data => {
+            if (Object.hasOwn(data, 'errors')) {
+              status.innerHTML = data["errors"].map(error => error["message"]).join(", ")
+            } else {
+              status.innerHTML = "Existe un problema, por favor, contactar por WhatsApp."
+            }
+          })
+        }
+      }).catch(error => {
+        status.innerHTML = "Existe un problema, por favor, contactar por WhatsApp."
+      });
+    }
+
+    form.addEventListener("submit", handleSubmit)
+
+    button.addEventListener('click', () => {
+      const formularioValido = validarFormulario();
+      if (formularioValido) {
+        lanzarConfeti();
+        limpiarURL();
+      }else{
+        status.innerHTML='Ingresar nombre, teléfono y correo electrónico, por favor.';
+        status.classList.add("animate-shake");
+        setTimeout(() => {
+        status.classList.remove("animate-shake");
+          status.innerHTML='';
+        }, 5000);
+      }
+    });
+  
+    function validarFormulario() {
+      const nombre = document.getElementById("nombre").value;
+      const correo = document.getElementById("correo").value;
+      const telefono = document.getElementById("telefono").value;
+  
+      // Aquí puedes agregar lógica de validación según tus requerimientos
+      const esValido = nombre.trim() !== '' && correo.trim() !== '' && telefono.trim() !== '';
+      return esValido;
+    }
+  
+    
+  
+    function lanzarConfeti() {
+      document.getElementById("genial").classList.remove("hidden");
+      document.getElementById("genial").classList.add("animate-jump-in");
+  
+      setTimeout(() => {
+        document.getElementById("genial").classList.add("animate-jump-out");
+        setTimeout(() => {
+          document.getElementById("genial").classList.add("hidden");
+          document.getElementById("genial").classList.remove("animate-jump-in");
+          document.getElementById("genial").classList.remove("animate-jump-out");
+        }, 1000);
+        document.getElementById("myModal").classList.add("animate-jump-out");
+      setTimeout(() => {
+          document.getElementById("myModal").classList.add("hidden"); 
+          document.getElementById("myModal").classList.remove("animate-jump-in");
+          document.getElementById("myModal").classList.remove("animate-jump-out");        
+      }, 1000);
+      }, 4000);
+  
+      
+  
+      jsConfetti.addConfetti({
+        emojiSize: 70,
+        emojis: ['🥋', '🥇', '🥈', '🥉','🏆'],
+        confettiNumber: 15,
+      });
+    }
+  
+    function limpiarURL() {
+      const nuevaURL = window.location.origin + window.location.pathname;
+      window.history.replaceState({}, document.title, nuevaURL);
+      setTimeout(() => {
+        document.getElementById("nombre").value="";
+        document.getElementById("correo").value="";
+        document.getElementById("telefono").value="";
+        document.getElementById("direccion").value="";    
+      }, 2000);
+    }
+  </script>

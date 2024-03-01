@@ -7,6 +7,7 @@ import Sectionmap from '../components/Sectionubicacion.astro';
 import Licard from '../components/Licard.astro';
 import Footer from '../components/Footer.astro';
 import Sectionsocial from '../components/Sectionsocial.astro';
+import Modalform from '../components/Modalform.astro';
 ---
 
 <Layout title="Escuela de Disciplina Marcial">
@@ -17,87 +18,46 @@ import Sectionsocial from '../components/Sectionsocial.astro';
 			<h2 class="text-3xl font-semibold text-gray-800 mb-6 text-center">Categorías</h2>
 			<p>Toma una clase gratuita en nuestras diversas categorías. ¡Te invitamos!</p>
 			<Licard
-			title="Pre-Kinder"
+			title="Pre-escolar"
 			body="Descubre el Taekwondo, donde la diversión se combina con el aprendizaje. Despierta tu fuerza interior desde el kinder. ¡Únete hoy!"
 			image='images/pre-kinder.jpg'
-			alt="prekinder"
-			boton="openModal('modal-prekinder')"
-			botonclose="closeModal('modal-prekinder')"
-			modal='modal-prekinder'
-			categoria="c1"
-			nombre="n1"
-			telefono="t1"
-			correo="e1"
-			direccion="d1";
+			alt="Pre escolar"
+			boton="openModal('Pre-escolar')"
 			/>
 			<Licard
 			title="Primaria"
 			body="Explora el Taekwondo en la primaria: diversión, disciplina y desarrollo personal. ¡Inscríbete ahora y descubre tu potencial con nosotros!"
 			image='images/primaria.jpg'
 			alt="primaria"
-			boton="openModal('modal-primaria')"
-			botonclose="closeModal('modal-primaria')"
-			modal='modal-primaria'
-			categoria="c2"
-			nombre="n2"
-			telefono="t2"
-			correo="e2"
-			direccion="d2";
+			boton="openModal('Primaria')"
 			/>
 			<Licard
 			title="Adolecente"
 			body="Conviértete en tu mejor versión con el Taekwondo. Descubre el poder interior, la disciplina y la diversión. Únete a nosotros hoy para un cambio positivo."
 			image='images/adolecente.jpg'
 			alt="adolecente"
-			boton="openModal('modal-adolecente')"
-			botonclose="closeModal('modal-adolecente')"
-			modal='modal-adolecente'
-			categoria="c3"
-			nombre="n3"
-			telefono="t3"
-			correo="e3"
-			direccion="d3";
+			boton="openModal('Adolecente')"
 			/>
 			<Licard
 			title="Adulto"
 			body="Descubre fuerza interior, disciplina y bienestar con el Taekwondo. Únete para transformarte física y mentalmente. ¡Practica Taekwondo y sé tu mejor versión!"
 			image='images/adulto.jpg'
-			alt="Adulto"
-			boton="openModal('modal-Adulto')"
-			botonclose="closeModal('modal-Adulto')"
-			modal='modal-Adulto'
-			categoria="c4"
-			nombre="n4"
-			telefono="t4"
-			correo="e4"
-			direccion="d4";
+			alt="adulto"
+			boton="openModal('Adulto')"
 			/>
 			<Licard
 			title="Adulto Mayor"
 			body="Experimenta bienestar y vitalidad con el Taekwondo, perfecto para adultos mayores. Únete a nuestra práctica suave y transformadora para una vida activa y saludable."
 			image='images/adulto-mayor.jpg'
-			alt="Adulto"
-			boton="openModal('modal-Adulto-mayor')"
-			botonclose="closeModal('modal-Adulto-mayor')"
-			modal='modal-Adulto-mayor'
-			categoria="c5"
-			nombre="n5"
-			telefono="t5"
-			correo="e5"
-			direccion="d5";
+			alt="Adulto mayor"
+			boton="openModal('Adulto-Mayor')"
 			/>
 		</section>
 		<Sectionsocial/>
 		<Sectionmap/>
+	<Modalform/>
 	</main>
 	<Footer/>
-
-	<div id="genial" class="modal hidden fixed inset-0 bg-black bg-opacity-50 items-center justify-center animate-fade-up">
-		<div class="modal-content bg-white w-full h-full p-2">
-		  <h1 class="text-center">
-			¡Enhorabuena por tomar una decisión importante! Pronto nos pondremos en contacto contigo. </h1>
-		  </div>
-	</div>
 </Layout>
 
 

@@ -1,27 +1,15 @@
 ---
-
-
-
-
-
 interface Props {
     title: string;
     body: string;
     image: string;
     alt: string;
     boton: string;
-    botonclose: string;
-    modal:string;
-    categoria: string;
-    nombre: string;
-    telefono: string;
-    correo: string;
-    direccion: string;
   }
 
-  const { title, body, image, alt, boton, botonclose, modal, categoria, nombre, telefono, correo, direccion} = Astro.props;
+  const { title, body, image, alt, boton} = Astro.props;
 ---  
-<div class="link-card inline-block max-w-sm h-400px mx-auto m-8 shadow-3 p-2 bg-white rounded">
+<div class="link-card inline-block max-w-sm w-20rem mx-auto m-8 shadow-3 p-2 bg-white rounded">
       <h2 class="text-center p-5">
         {title}
       </h2>
@@ -33,125 +21,14 @@ interface Props {
 
 </div>
 
-  <mod id={modal} class="modal hidden fixed inset-0 bg-black bg-opacity-50 items-center justify-center animate-fade-up">
-    <div class="modal-content bg-white w-full h-full p-2">
-      <p class="text-center">
-        ¡Aprovecha ahora y solicita tu clase gratis!</p>
-      <div class="container mx-auto p-1">
-        <form class="max-w-md mx-auto bg-white p-8 rounded-lg shadow-md">
-        
-        <div class="mb-4">
-            <label for="nombre" class="block text-gray-700 text-sm font-bold mb-1">Categoria:</label>
-            <input type="text" id={categoria} readonly name={categoria} class="w-full border p-2 rounded-md" value={title}/>
-        </div>
 
-          <div class="mb-4">
-            <label for="nombre" class="block text-gray-700 text-sm font-bold mb-1">Nombre:</label>
-            <input type="text" id={nombre} name={nombre} class="w-full border p-2 rounded-md" placeholder="Nombre completo" required />
-          </div>
-      
-          <div class="mb-4">
-            <label for="telefono" class="block text-gray-700 text-sm font-bold mb-1">Teléfono:</label>
-            <input type="tel" id={telefono} name={telefono} class="w-full border p-2 rounded-md" placeholder="Número de teléfono" required />
-          </div>
-      
-          <div class="mb-4">
-            <label for="correo" class="block text-gray-700 text-sm font-bold mb-1">Correo electrónico:</label>
-            <input type="email" id={correo} name={correo} class="w-full border p-2 rounded-md" placeholder="Correo electrónico" required />
-          </div>
-      
-          <div class="mb-4">
-            <label for="direccion" class="block text-gray-700 text-sm font-bold mb-1">Dirección:</label>
-            <textarea id={direccion} name={direccion} class="w-full border p-2 rounded-md" placeholder="Dirección"></textarea>
-          </div>
-      
-          <div class="flex justify-end space-x-4">
-            <button type="button" class="bg-blue-500 text-white px-4 py-2 rounded-md" onclick={botonclose}>Cerrar</button>
-            <button type="button" class="bg-green-500 text-white px-4 py-2 rounded-md" data-confetti-button onclick={botonclose}>Enviar</button>
-          </div>
-        </form>
-      </div>
-      
-
-
-      
-    </div>
-  </mod>
   
 
 
 <script is:inline>
-
-
-  function openModal(modName) {
-    document.getElementById(modName).classList.remove("hidden");
-    document.getElementById(modName).classList.add("animate-jump-in");
-  }
-
-  function closeModal(modName) {
-    document.getElementById(modName).classList.add("animate-jump-out");
-    setTimeout(() => {
-        document.getElementById(modName).classList.add("hidden"); 
-        document.getElementById(modName).classList.remove("animate-jump-in");
-        document.getElementById(modName).classList.remove("animate-jump-out");        
-    }, 1000);
-  }
-
-
-
-</script>
-<script is:inline type="module">
-  import JSConfetti from 'https://cdn.skypack.dev/js-confetti';
-
-  const jsConfetti = new JSConfetti();
-  const button = document.querySelector('[data-confetti-button]');
-
-  button.addEventListener('click', () => {
-    const formularioValido = validarFormulario();
-    if (formularioValido) {
-      lanzarConfeti();
-      limpiarURL();
-    }else{
-      alert('llenar el formulario');
-    }
-  });
-
-  function validarFormulario(n,e,t) {
-    const nombre = document.getElementById(n).value;
-    const correo = document.getElementById(e).value;
-    const telefono = document.getElementById(t).value;
-
-    // Aquí puedes agregar lógica de validación según tus requerimientos
-    const esValido = nombre.trim() !== '' && correo.trim() !== '' && telefono.trim() !== '';
-    return esValido;
-  }
-
-  
-
-  function lanzarConfeti() {
-    document.getElementById("genial").classList.remove("hidden");
-    document.getElementById("genial").classList.add("animate-jump-in");
-
-    setTimeout(() => {
-      document.getElementById("genial").classList.add("animate-jump-out");
-      setTimeout(() => {
-        document.getElementById("genial").classList.add("hidden");
-        document.getElementById("genial").classList.remove("animate-jump-in");
-        document.getElementById("genial").classList.remove("animate-jump-out");
-      }, 1000);
-    }, 4000);
-
-    
-
-    jsConfetti.addConfetti({
-      emojiSize: 70,
-      emojis: ['🥋', '🥇', '🥈', '🥉'],
-      confettiNumber: 15,
-    });
-  }
-
-  function limpiarURL() {
-    const nuevaURL = window.location.origin + window.location.pathname;
-    window.history.replaceState({}, document.title, nuevaURL);
+  function openModal(cat) {
+    document.getElementById("myModal").classList.remove("hidden");
+    document.getElementById("myModal").classList.add("animate-jump-in");
+    document.getElementById('categoria').value=cat;
   }
 </script>

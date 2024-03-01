@@ -4,6 +4,10 @@ import tailwind from "@astrojs/tailwind";
 
 // https://astro.build/config
 export default defineConfig({
-  base: '',
-  integrations: [tailwind()]
+  scripts: [
+    { src: '/global.js', type: 'module' },
+  ],
+  integrations: [
+    tailwind()
+  ]
 });
